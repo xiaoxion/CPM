@@ -6,8 +6,6 @@ import android.app.ActionBar;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,23 +20,13 @@ import com.parse.Parse;
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
-    private static final String PREFS_NAME = "UserData";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        SharedPreferences userData = getSharedPreferences(PREFS_NAME, 0);
-        boolean loggedIn = userData.getBoolean("loggedIn", false);
-        if (loggedIn) {
-            Parse.initialize(this, "3fE0cRIrdo0RW4Y3DBiNueuJzpWijqPjufuTDllW", "gME0wQ3IB5ZAbyPYBBgShjUOfQ7e92w9U3ayF7m3");
-
-        } else {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
-
         setContentView(R.layout.activity_main);
+
+        Parse.initialize(this, "3fE0cRIrdo0RW4Y3DBiNueuJzpWijqPjufuTDllW", "gME0wQ3IB5ZAbyPYBBgShjUOfQ7e92w9U3ayF7m3");
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -59,7 +47,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                 fragmentManager.beginTransaction().replace(R.id.container, ListFragment.newInstance(position + 1)).commit();
                 break;
             case 2:
-                fragmentManager.beginTransaction().replace(R.id.container, LogoutFragment.newInstance(position + 1)).commit();
+                fragmentManager
                 break;
         }
     }
@@ -82,17 +70,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-        }
     }
 
     public void restoreActionBar() {
@@ -119,15 +96,9 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_login, container, false);
             return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((LoginActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
 
@@ -149,12 +120,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_list, container, false);
             return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((LoginActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
 }
