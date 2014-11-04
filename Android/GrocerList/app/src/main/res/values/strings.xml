@@ -5,7 +5,7 @@
     <string name="title_section1">List</string>
     <string name="title_section2">Logout</string>
 
-    <string name="login_email">E-mail</string>
+    <string name="login_email">Username</string>
     <string name="login_password">Password</string>
     <string name="login_button">Login</string>
     <string name="login_register">Need Account? Register Here</string>
@@ -15,8 +15,13 @@
     <string name="register_password">Password</string>
     <string name="register_me">Register Me!</string>
 
+    <string name="dialog_continue">Continue</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_grocery">Grocery</string>
+    <string name="dialog_amount">#</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Sync</string>
+    <string name="action_example">Add</string>
 
 </resources>
