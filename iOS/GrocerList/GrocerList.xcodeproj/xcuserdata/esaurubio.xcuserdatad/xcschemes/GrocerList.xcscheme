@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B9F6BF01A09850000DA48B7"
+               BlueprintIdentifier = "7BF08E251A0991CA00C25C40"
                BuildableName = "GrocerList.app"
                BlueprintName = "GrocerList"
                ReferencedContainer = "container:GrocerList.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B9F6C091A09850000DA48B7"
+               BlueprintIdentifier = "7BF08E3E1A0991CB00C25C40"
                BuildableName = "GrocerListTests.xctest"
                BlueprintName = "GrocerListTests"
                ReferencedContainer = "container:GrocerList.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B9F6C091A09850000DA48B7"
+               BlueprintIdentifier = "7BF08E3E1A0991CB00C25C40"
                BuildableName = "GrocerListTests.xctest"
                BlueprintName = "GrocerListTests"
                ReferencedContainer = "container:GrocerList.xcodeproj">
@@ -56,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B9F6BF01A09850000DA48B7"
+            BlueprintIdentifier = "7BF08E251A0991CA00C25C40"
             BuildableName = "GrocerList.app"
             BlueprintName = "GrocerList"
             ReferencedContainer = "container:GrocerList.xcodeproj">
@@ -75,7 +75,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B9F6BF01A09850000DA48B7"
+            BlueprintIdentifier = "7BF08E251A0991CA00C25C40"
             BuildableName = "GrocerList.app"
             BlueprintName = "GrocerList"
             ReferencedContainer = "container:GrocerList.xcodeproj">
@@ -93,7 +93,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B9F6BF01A09850000DA48B7"
+            BlueprintIdentifier = "7BF08E251A0991CA00C25C40"
             BuildableName = "GrocerList.app"
             BlueprintName = "GrocerList"
             ReferencedContainer = "container:GrocerList.xcodeproj">

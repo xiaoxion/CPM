@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+{
+    IBOutlet UITextField *username;
+    IBOutlet UITextField *password;
+}
 
+-(IBAction)onClick:(id)sender;
 
 @end
 

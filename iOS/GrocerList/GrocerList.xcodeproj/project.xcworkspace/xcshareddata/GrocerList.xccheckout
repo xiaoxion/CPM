@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>11F67DD2-ECA3-4FE2-B03C-4E944D53B098</string>
+	<string>4DD60C2C-8DF9-4C1C-AB84-40A5E0C98B9E</string>
 	<key>IDESourceControlProjectName</key>
 	<string>GrocerList</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,11 +14,11 @@
 		<string>https://github.com/xiaoxion/XPM.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>GrocerList/GrocerList.xcodeproj</string>
+	<string>iOS/GrocerList/GrocerList.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A1DE64C53E5752233A294367AC6E6B763DD92FF6</key>
-		<string>../../..</string>
+		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/xiaoxion/XPM.git</string>
