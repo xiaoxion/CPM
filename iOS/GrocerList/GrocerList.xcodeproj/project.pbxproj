@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B1C113D1A0B342C00F0A090 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1C113B1A0B342C00F0A090 /* Bolts.framework */; };
-		7B1C113E1A0B342C00F0A090 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1C113C1A0B342C00F0A090 /* Parse.framework */; };
+		7BDA9E641A0C120F00A5067B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BDA9E621A0C120F00A5067B /* Bolts.framework */; };
+		7BDA9E651A0C120F00A5067B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BDA9E631A0C120F00A5067B /* Parse.framework */; };
 		7BF08E2C1A0991CA00C25C40 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF08E2B1A0991CA00C25C40 /* main.m */; };
 		7BF08E2F1A0991CA00C25C40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF08E2E1A0991CA00C25C40 /* AppDelegate.m */; };
 		7BF08E321A0991CA00C25C40 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF08E311A0991CA00C25C40 /* ViewController.m */; };
@@ -40,8 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7B1C113B1A0B342C00F0A090 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Parse/Bolts.framework; sourceTree = "<group>"; };
-		7B1C113C1A0B342C00F0A090 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Parse/Parse.framework; sourceTree = "<group>"; };
+		7BDA9E621A0C120F00A5067B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../../../../Users/esaurubio/Downloads/parse-library-1.4.2/Bolts.framework"; sourceTree = "<group>"; };
+		7BDA9E631A0C120F00A5067B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../../../Users/esaurubio/Downloads/parse-library-1.4.2/Parse.framework"; sourceTree = "<group>"; };
 		7BF08E261A0991CA00C25C40 /* GrocerList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrocerList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BF08E2A1A0991CA00C25C40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BF08E2B1A0991CA00C25C40 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -79,8 +79,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B1C113D1A0B342C00F0A090 /* Bolts.framework in Frameworks */,
-				7B1C113E1A0B342C00F0A090 /* Parse.framework in Frameworks */,
+				7BDA9E641A0C120F00A5067B /* Bolts.framework in Frameworks */,
+				7BDA9E651A0C120F00A5067B /* Parse.framework in Frameworks */,
 				7BF08E731A0AD04A00C25C40 /* SystemConfiguration.framework in Frameworks */,
 				7BF08E6F1A0AD03600C25C40 /* Security.framework in Frameworks */,
 				7BF08E6D1A0AD02F00C25C40 /* QuartzCore.framework in Frameworks */,
@@ -170,8 +170,8 @@
 		7BF08E741A0AD06B00C25C40 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7B1C113B1A0B342C00F0A090 /* Bolts.framework */,
-				7B1C113C1A0B342C00F0A090 /* Parse.framework */,
+				7BDA9E621A0C120F00A5067B /* Bolts.framework */,
+				7BDA9E631A0C120F00A5067B /* Parse.framework */,
 				7BF08E721A0AD04A00C25C40 /* SystemConfiguration.framework */,
 				7BF08E6E1A0AD03600C25C40 /* Security.framework */,
 				7BF08E6C1A0AD02F00C25C40 /* QuartzCore.framework */,
@@ -423,8 +423,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/parse-library-1.4.2",
 					"$(PROJECT_DIR)/Parse",
+					"/Users/esaurubio/Downloads/parse-library-1.4.2",
 				);
 				INFOPLIST_FILE = GrocerList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -439,8 +439,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/parse-library-1.4.2",
 					"$(PROJECT_DIR)/Parse",
+					"/Users/esaurubio/Downloads/parse-library-1.4.2",
 				);
 				INFOPLIST_FILE = GrocerList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;

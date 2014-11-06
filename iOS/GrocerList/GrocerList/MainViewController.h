@@ -6,8 +6,14 @@
 //  Copyright (c) 2014 Strtatazima. All rights reserved.
 //
 
-#import "ViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface MainViewController : ViewController
+@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    IBOutlet UITableView *groceriesTable;
+    NSMutableArray *data;
+}
+
+-(IBAction)onClick:(id)sender;
 
 @end

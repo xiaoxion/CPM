@@ -20,12 +20,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:true];
+    
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
         [self performSegueWithIdentifier:@"loggedIn" sender:self];
     }
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

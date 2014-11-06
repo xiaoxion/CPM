@@ -57,8 +57,8 @@
                     <connections>
                         <outlet property="password" destination="kcN-AY-9iR" id="QOz-xm-2NM"/>
                         <outlet property="username" destination="55k-Hc-cGD" id="VxU-j0-WXk"/>
-                        <segue destination="sgR-7L-K5O" kind="presentation" identifier="loggedIn" id="uDC-jX-cf3"/>
-                        <segue destination="hDG-B2-iu9" kind="presentation" identifier="register" id="LZF-LB-IxG"/>
+                        <segue destination="sgR-7L-K5O" kind="show" identifier="loggedIn" id="uDC-jX-cf3"/>
+                        <segue destination="hDG-B2-iu9" kind="show" identifier="register" id="LZF-LB-IxG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -140,12 +140,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ONd-Tt-emW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700" y="1090"/>
+            <point key="canvasLocation" x="692" y="1156"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="Ygb-XR-fWl">
             <objects>
-                <viewController id="sgR-7L-K5O" sceneMemberID="viewController">
+                <viewController id="sgR-7L-K5O" customClass="MainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kw4-Xd-kam"/>
                         <viewControllerLayoutGuide type="bottom" id="gXz-lE-40Z"/>
@@ -158,19 +158,39 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="GrocerList" id="cwx-g4-RGQ">
-                                        <barButtonItem key="leftBarButtonItem" title="Item" id="9DD-Ea-g2K"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="H8Q-C0-tQ4"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="9DD-Ea-g2K">
+                                            <connections>
+                                                <action selector="onClick:" destination="sgR-7L-K5O" id="IW5-U9-gc0"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" tag="1" systemItem="add" id="H8Q-C0-tQ4">
+                                            <connections>
+                                                <action selector="onClick:" destination="sgR-7L-K5O" id="w6m-Pw-jIu"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="l2K-vp-GQM">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="sgR-7L-K5O" id="JP5-CU-3UE"/>
+                                    <outlet property="delegate" destination="sgR-7L-K5O" id="XTi-bE-Pko"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="groceriesTable" destination="l2K-vp-GQM" id="IRe-75-UjF"/>
+                        <segue destination="vXZ-lx-hvc" kind="show" identifier="loggedOut" id="slq-hd-I4y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nsv-oP-FyX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102" y="407"/>
+            <point key="canvasLocation" x="1193" y="479"/>
         </scene>
     </scenes>
 </document>

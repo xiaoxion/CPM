@@ -50,9 +50,7 @@
                                       kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionRight)
                                       };
             
-            [CRToastManager showNotificationWithOptions:options completionBlock:^{NSLog(@"Completed");}];
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [CRToastManager showNotificationWithOptions:options completionBlock:^{[self dismissViewControllerAnimated:YES completion:nil];}];
         } else {
             NSDictionary *options = @{
                                       kCRToastTextKey : [error userInfo][@"error"],
@@ -64,7 +62,7 @@
                                       kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionRight)
                                       };
             
-            [CRToastManager showNotificationWithOptions:options completionBlock:^{NSLog(@"Completed");}];
+            [CRToastManager showNotificationWithOptions:options completionBlock:nil];
         }
     }];
 }

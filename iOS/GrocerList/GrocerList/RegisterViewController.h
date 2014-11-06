@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Strtatazima. All rights reserved.
 //
 
-#import "ViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface RegisterViewController : ViewController <UITextFieldDelegate>
+@interface RegisterViewController : UIViewController <UITextFieldDelegate>
 {
     IBOutlet UITextField *usernameR;
     IBOutlet UITextField *passwordR;
