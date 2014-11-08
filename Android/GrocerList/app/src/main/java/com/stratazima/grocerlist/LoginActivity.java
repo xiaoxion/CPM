@@ -112,7 +112,8 @@ public class LoginActivity extends Activity {
                                 Toast.makeText(getActivity(), "Congrats!", Toast.LENGTH_SHORT).show();
                                 getActivity().getFragmentManager().beginTransaction().replace(R.id.container2, new LoginFragment()).commit();
                             } else {
-                                Toast.makeText(getActivity(), "Error, Please Try Again Later", Toast.LENGTH_SHORT).show();
+                                e.getMessage();
+                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
                     });

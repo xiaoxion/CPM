@@ -10,7 +10,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,19 +19,17 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -45,8 +42,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Parse.initialize(this, "3fE0cRIrdo0RW4Y3DBiNueuJzpWijqPjufuTDllW", "gME0wQ3IB5ZAbyPYBBgShjUOfQ7e92w9U3ayF7m3");
-
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
@@ -55,13 +50,12 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         onRefreshData();
     }
 
-
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         FragmentManager fragmentManager = getFragmentManager();
         switch (position) {
             case 0:
-                fragmentManager.beginTransaction().replace(R.id.container, DaListFragment.newInstance(1), "listFrag").commit();
+                fragmentManager.beginTransaction().replace(R.id.container, DaListFragment.newInstance(), "listFrag").commit();
                 break;
             case 1:
                 DialogFragment dialogFragment = LogoutDialogFragment.newInstance();
@@ -177,7 +171,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         }
     }
 
-
     public static class DeleteDialogFragment extends DialogFragment {
         static int mPosition;
 
@@ -215,14 +208,9 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     public static class DaListFragment extends Fragment {
         private ListView mainList;
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        public static DaListFragment newInstance(int sectionNumber) {
-            DaListFragment fragment = new DaListFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
+        public static DaListFragment newInstance() {
+            return new DaListFragment();
         }
 
         @Override
@@ -232,79 +220,12 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             return rootView;
         }
 
-        public void onList(final List<ParseObject> objects){
-            ListAdapter listAdapter = new ListAdapter() {
-                @Override
-                public boolean areAllItemsEnabled() {
-                    return true;
-                }
+        public void onList(List<ParseObject> objects) {
+            ArrayList<ParseObject> myList = new ArrayList<ParseObject>();
+            myList.addAll(objects);
+            String[] length = new String[myList.size()];
 
-                @Override
-                public boolean isEnabled(int position) {
-                    return true;
-                }
-
-                @Override
-                public void registerDataSetObserver(DataSetObserver observer) {
-
-                }
-
-                @Override
-                public void unregisterDataSetObserver(DataSetObserver observer) {
-
-                }
-
-                @Override
-                public int getCount() {
-                    return objects.size();
-                }
-
-                @Override
-                public Object getItem(int position) {
-                    return null;
-                }
-
-                @Override
-                public long getItemId(int position) {
-                    return position;
-                }
-
-                @Override
-                public boolean hasStableIds() {
-                    return false;
-                }
-
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    ViewHolder holder;
-
-                    convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item, parent, false);
-
-                    holder = new ViewHolder();
-                    holder.mainText = (TextView) convertView.findViewById(R.id.list_main);
-                    holder.subText = (TextView) convertView.findViewById(R.id.list_sub);
-
-                    holder.mainText.setText(objects.get(position).getString("grocery"));
-                    holder.subText.setText(objects.get(position).getString("number"));
-
-                    return convertView;
-                }
-
-                @Override
-                public int getItemViewType(int position) {
-                    return position;
-                }
-
-                @Override
-                public int getViewTypeCount() {
-                    return 1;
-                }
-
-                @Override
-                public boolean isEmpty() {
-                    return false;
-                }
-            };
+            MainListAdapter listAdapter = new MainListAdapter(getActivity(), length, myList);
 
             mainList.setAdapter(listAdapter);
             mainList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -315,11 +236,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                     return false;
                 }
             });
-        }
-
-        static class ViewHolder {
-            TextView mainText;
-            TextView subText;
         }
     }
 }
