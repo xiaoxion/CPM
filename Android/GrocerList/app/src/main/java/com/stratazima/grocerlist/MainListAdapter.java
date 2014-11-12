@@ -18,8 +18,8 @@ public class MainListAdapter extends ArrayAdapter {
     private final Activity mContext;
     private final ArrayList<ParseObject> mainArrayList;
 
-    public MainListAdapter (Activity mContext, String[] length, ArrayList<ParseObject> mainArrayList) {
-        super(mContext, R.layout.list_item, length);
+    public MainListAdapter (Activity mContext, ArrayList<ParseObject> mainArrayList) {
+        super(mContext, R.layout.list_item, mainArrayList);
 
         this.mContext = mContext;
         this.mainArrayList = mainArrayList;
@@ -48,8 +48,26 @@ public class MainListAdapter extends ArrayAdapter {
         return convertView;
     }
 
+    @Override
+    public boolean isEnabled(int position) {
+        return true;
+    }
+
     static class ViewHolder {
         TextView mainText;
         TextView subText;
+    }
+
+    public void removeObject(int position) {
+        mainArrayList.get(position).deleteInBackground();
+        mainArrayList.remove(position);
+    }
+
+    public void addObject(ParseObject object) {
+        mainArrayList.add(object);
+    }
+
+    public void replaceObject(ParseObject object, int position) {
+        mainArrayList.set(position, object);
     }
 }

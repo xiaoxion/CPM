@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_listView"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@android:color/holo_red_light"
+        android:divider="@android:color/white" />
 
 </RelativeLayout>
