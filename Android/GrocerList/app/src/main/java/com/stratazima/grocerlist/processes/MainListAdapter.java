@@ -1,4 +1,4 @@
-package com.stratazima.grocerlist;
+package com.stratazima.grocerlist.processes;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseObject;
+import com.stratazima.grocerlist.R;
 
 import java.util.ArrayList;
 

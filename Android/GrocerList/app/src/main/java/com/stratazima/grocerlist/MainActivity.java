@@ -28,6 +28,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.stratazima.grocerlist.processes.MainListAdapter;
+import com.stratazima.grocerlist.processes.NavigationDrawerFragment;
 import com.stratazima.grocerlist.processes.SwipeDismissListViewTouchListener;
 
 import java.util.ArrayList;

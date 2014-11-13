@@ -2,7 +2,10 @@ package com.stratazima.grocerlist;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +28,6 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Parse.enableLocalDatastore(getApplicationContext());
-        Parse.initialize(this, "3fE0cRIrdo0RW4Y3DBiNueuJzpWijqPjufuTDllW", "gME0wQ3IB5ZAbyPYBBgShjUOfQ7e92w9U3ayF7m3");
         ParseUser currentUser = ParseUser.getCurrentUser();
 
         if (currentUser != null) {
@@ -38,6 +39,12 @@ public class LoginActivity extends Activity {
                 getFragmentManager().beginTransaction().add(R.id.container2, new LoginFragment()).commit();
             }
         }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     public static class LoginFragment extends Fragment {
@@ -55,29 +62,38 @@ public class LoginActivity extends Activity {
             Button loginButton = (Button) rootView.findViewById(R.id.email_sign_in_button);
             Button registerButton = (Button) rootView.findViewById(R.id.register_button);
 
-            loginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ParseUser.logInInBackground(email.getText().toString(), password.getText().toString(), new LogInCallback() {
-                        @Override
-                        public void done(ParseUser parseUser, com.parse.ParseException e) {
-                            if (parseUser != null) {
-                                Intent intent = new Intent(getActivity(), MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(getActivity(),"Error, Please Try Again Later", Toast.LENGTH_SHORT).show();
+            if (((LoginActivity)getActivity()).isOnline()) {
+                loginButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ParseUser.logInInBackground(email.getText().toString(), password.getText().toString(), new LogInCallback() {
+                            @Override
+                            public void done(ParseUser parseUser, com.parse.ParseException e) {
+                                if (parseUser != null) {
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
-                }
-            });
+                        });
+                    }
+                });
 
-            registerButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container2, new RegisterFragment()).commit();
-                }
-            });
+                registerButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().getFragmentManager().beginTransaction().replace(R.id.container2, new RegisterFragment()).commit();
+                    }
+                });
+            } else {
+                email.setEnabled(false);
+                password.setEnabled(false);
+                loginButton.setEnabled(false);
+                registerButton.setEnabled(false);
+                Toast.makeText(getActivity(), "Check Network Connection & Try Again", Toast.LENGTH_SHORT).show();
+            }
+
             return rootView;
         }
     }
