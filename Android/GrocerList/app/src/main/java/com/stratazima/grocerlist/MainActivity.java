@@ -58,7 +58,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                 fragmentManager.beginTransaction().replace(R.id.container, DaListFragment.newInstance(), "listFrag").commit();
                 break;
             case 1:
-                DialogFragment dialogFragment = OmniDialogFragment.newInstance(false, true, null, 0);
+                DialogFragment dialogFragment = OmniDialogFragment.newInstance(false, null, -1);
                 dialogFragment.show(fragmentManager, "logout");
                 break;
         }
@@ -78,7 +78,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_example) {
-            DialogFragment dialogFragment = OmniDialogFragment.newInstance(false, false, null, 0);
+            DialogFragment dialogFragment = OmniDialogFragment.newInstance(false, null, 0);
             dialogFragment.show(getFragmentManager(), "add");
             return true;
         }
@@ -114,7 +114,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         private EditText grocery;
         private EditText number;
         private boolean mEdit;
-        private boolean mLogout;
         private ParseObject mParseObject;
         private int mPosition;
 
@@ -123,10 +122,9 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             super.setRetainInstance(retain);
         }
 
-        public static OmniDialogFragment newInstance(boolean edit, boolean logout, ParseObject parseObject, int position) {
+        public static OmniDialogFragment newInstance(boolean edit, ParseObject parseObject, int position) {
             OmniDialogFragment newFragment = new OmniDialogFragment();
             newFragment.mEdit = edit;
-            newFragment.mLogout = logout;
             newFragment.mParseObject = parseObject;
             newFragment.mPosition = position;
 
@@ -137,7 +135,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-            if (mLogout) {
+            if (mPosition == -1) {
                 builder.setMessage("Are you sure?")
                         .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -156,6 +154,8 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             }
 
             View rootView = getActivity().getLayoutInflater().inflate(R.layout.dialog_add, null);
+            final DaListFragment fragment = (DaListFragment) getFragmentManager().findFragmentByTag("listFrag");
+
             grocery = (EditText) rootView.findViewById(R.id.grocery_name);
             number = (EditText) rootView.findViewById(R.id.grocery_number);
 
@@ -168,9 +168,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                             public void onClick(DialogInterface dialog, int id) {
                                 mParseObject.put("grocery", grocery.getText().toString());
                                 mParseObject.put("number", Integer.parseInt(number.getText().toString()));
-                                mParseObject.saveInBackground();
 
-                                DaListFragment fragment = (DaListFragment) getFragmentManager().findFragmentByTag("listFrag");
                                 fragment.mAdapter.replaceObject(mParseObject, mPosition);
                                 fragment.mAdapter.notifyDataSetChanged();
                             }
@@ -189,9 +187,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                                 groceries.put("grocery", grocery.getText().toString());
                                 groceries.put("number", Integer.parseInt(number.getText().toString()));
                                 groceries.setACL(new ParseACL(ParseUser.getCurrentUser()));
-                                groceries.saveInBackground();
 
-                                DaListFragment fragment = (DaListFragment) getFragmentManager().findFragmentByTag("listFrag");
                                 fragment.mAdapter.addObject(groceries);
                                 fragment.mAdapter.notifyDataSetChanged();
                             }
@@ -250,7 +246,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    DialogFragment dialogFragment = OmniDialogFragment.newInstance(true, false, myList.get(position), position);
+                    DialogFragment dialogFragment = OmniDialogFragment.newInstance(true, myList.get(position), position);
                     dialogFragment.show(getFragmentManager(), "edit");
                 }
             });

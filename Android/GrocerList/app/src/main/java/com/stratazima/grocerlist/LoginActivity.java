@@ -25,6 +25,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Parse.enableLocalDatastore(getApplicationContext());
         Parse.initialize(this, "3fE0cRIrdo0RW4Y3DBiNueuJzpWijqPjufuTDllW", "gME0wQ3IB5ZAbyPYBBgShjUOfQ7e92w9U3ayF7m3");
         ParseUser currentUser = ParseUser.getCurrentUser();
 
@@ -109,7 +110,7 @@ public class LoginActivity extends Activity {
                         @Override
                         public void done(com.parse.ParseException e) {
                             if (e == null) {
-                                Toast.makeText(getActivity(), "Congrats!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Successful!", Toast.LENGTH_SHORT).show();
                                 getActivity().getFragmentManager().beginTransaction().replace(R.id.container2, new LoginFragment()).commit();
                             } else {
                                 e.getMessage();
