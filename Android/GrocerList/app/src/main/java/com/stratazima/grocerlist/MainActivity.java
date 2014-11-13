@@ -8,8 +8,11 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -99,6 +102,11 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     public void onRefreshData(){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Groceries");
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (!(netInfo != null && netInfo.isConnectedOrConnecting())) query.fromLocalDatastore();
+
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {

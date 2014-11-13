@@ -28,6 +28,8 @@ public class MainListAdapter extends ArrayAdapter {
 
         this.mContext = mContext;
         this.mainArrayList = mainArrayList;
+
+        if (isOnline()) refreshDataStore();
     }
 
     @Override
@@ -53,11 +55,6 @@ public class MainListAdapter extends ArrayAdapter {
         return convertView;
     }
 
-    @Override
-    public boolean isEnabled(int position) {
-        return true;
-    }
-
     public boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -69,38 +66,44 @@ public class MainListAdapter extends ArrayAdapter {
         TextView subText;
     }
 
+    public void refreshDataStore() {
+        ParseObject.unpinAllInBackground();
+        ParseObject.pinAllInBackground(mainArrayList);
+    }
+
     public void removeObject(int position) {
         if (isOnline()) {
             mainArrayList.get(position).deleteInBackground();
-            mainArrayList.remove(position);
         } else {
             mainArrayList.get(position).deleteEventually();
-            mainArrayList.remove(position);
             Toast.makeText(mContext, "Pending Delete", Toast.LENGTH_SHORT).show();
         }
+
+        mainArrayList.get(position).unpinInBackground();
+        mainArrayList.remove(position);
     }
 
     public void addObject(ParseObject object) {
         if (isOnline()) {
             object.saveInBackground();
-            mainArrayList.add(object);
         } else {
             object.saveEventually();
-            mainArrayList.add(object);
             Toast.makeText(mContext, "Pending Add", Toast.LENGTH_SHORT).show();
-
         }
+
+        object.pinInBackground();
+        mainArrayList.add(object);
+
     }
 
     public void replaceObject(ParseObject object, int position) {
         if (isOnline()) {
             object.saveInBackground();
-            mainArrayList.set(position, object);
         } else {
             object.saveEventually();
-            mainArrayList.set(position, object);
             Toast.makeText(mContext, "Pending Update", Toast.LENGTH_SHORT).show();
-
         }
+
+        mainArrayList.set(position, object);
     }
 }

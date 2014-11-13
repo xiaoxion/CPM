@@ -114,28 +114,38 @@ public class LoginActivity extends Activity {
             password = (EditText) rootView.findViewById(R.id.register_password);
             Button registerButton = (Button) rootView.findViewById(R.id.da_register_button);
 
-            registerButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ParseUser user = new ParseUser();
-                    user.setUsername(username.getText().toString());
-                    user.setEmail(email.getText().toString());
-                    user.setPassword(password.getText().toString());
+            if (((LoginActivity)getActivity()).isOnline()) {
+                registerButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ParseUser user = new ParseUser();
+                        user.setUsername(username.getText().toString());
+                        user.setEmail(email.getText().toString());
+                        user.setPassword(password.getText().toString());
 
-                    user.signUpInBackground(new SignUpCallback() {
-                        @Override
-                        public void done(com.parse.ParseException e) {
-                            if (e == null) {
-                                Toast.makeText(getActivity(), "Successful!", Toast.LENGTH_SHORT).show();
-                                getActivity().getFragmentManager().beginTransaction().replace(R.id.container2, new LoginFragment()).commit();
-                            } else {
-                                e.getMessage();
-                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        user.signUpInBackground(new SignUpCallback() {
+                            @Override
+                            public void done(com.parse.ParseException e) {
+                                if (e == null) {
+                                    Toast.makeText(getActivity(), "Successful!", Toast.LENGTH_SHORT).show();
+                                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container2, new LoginFragment()).commit();
+                                } else {
+                                    e.getMessage();
+                                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }
-                    });
-                }
-            });
+                        });
+                    }
+                });
+            } else {
+                username.setEnabled(false);
+                email.setEnabled(false);
+                password.setEnabled(false);
+                registerButton.setEnabled(false);
+                Toast.makeText(getActivity(), "Check Network Connection & Try Again", Toast.LENGTH_SHORT).show();
+            }
+
+
             return rootView;
         }
     }
