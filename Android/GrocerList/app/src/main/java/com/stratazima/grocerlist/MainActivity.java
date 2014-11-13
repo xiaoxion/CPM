@@ -3,14 +3,18 @@ package com.stratazima.grocerlist;
 import android.app.Activity;
 
 import android.app.ActionBar;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -31,6 +35,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.stratazima.grocerlist.processes.AlarmMangerPoller;
 import com.stratazima.grocerlist.processes.MainListAdapter;
 import com.stratazima.grocerlist.processes.NavigationDrawerFragment;
 import com.stratazima.grocerlist.processes.SwipeDismissListViewTouchListener;
@@ -42,6 +47,13 @@ import java.util.List;
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (isOnline()) onRefreshData();
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +64,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
         mTitle = getTitle();
+        onSetPoller();
         onRefreshData();
     }
 
@@ -91,6 +104,18 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(broadcastReceiver);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
@@ -100,12 +125,20 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         }
     }
 
+    public void onSetPoller() {
+        Intent intent = new Intent(this, AlarmMangerPoller.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+        long scTime = 30000;
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + scTime, scTime, pendingIntent);
+
+        registerReceiver(broadcastReceiver, new IntentFilter("Connect"));
+    }
+
     public void onRefreshData(){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Groceries");
-
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (!(netInfo != null && netInfo.isConnectedOrConnecting())) query.fromLocalDatastore();
+        if (!isOnline()) query.fromLocalDatastore();
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -155,11 +188,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                                 getActivity().finish();
                             }
                         })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                OmniDialogFragment.this.getDialog().cancel();
-                            }
-                        });
+                        .setNegativeButton("Cancel", null);
                 return builder.create();
             }
 
@@ -168,47 +197,48 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             grocery = (EditText) rootView.findViewById(R.id.grocery_name);
             number = (EditText) rootView.findViewById(R.id.grocery_number);
+            String isAdd = "Add";
+            builder.setView(rootView).setNegativeButton("Cancel", null);
 
             if (mEdit) {
                 grocery.setText(mParseObject.getString("grocery"));
                 number.setText(String.valueOf(mParseObject.getInt("number")));
-                builder.setView(rootView)
-                        .setPositiveButton("Update", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                mParseObject.put("grocery", grocery.getText().toString());
-                                mParseObject.put("number", Integer.parseInt(number.getText().toString()));
-
-                                fragment.mAdapter.replaceObject(mParseObject, mPosition);
-                                fragment.mAdapter.notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                OmniDialogFragment.this.getDialog().cancel();
-                            }
-                        });
-            } else {
-                builder.setView(rootView)
-                        .setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                ParseObject groceries = new ParseObject("Groceries");
-                                groceries.put("grocery", grocery.getText().toString());
-                                groceries.put("number", Integer.parseInt(number.getText().toString()));
-                                groceries.setACL(new ParseACL(ParseUser.getCurrentUser()));
-
-                                fragment.mAdapter.addObject(groceries);
-                                fragment.mAdapter.notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                OmniDialogFragment.this.getDialog().cancel();
-                            }
-                        });
+                isAdd = "Update";
             }
 
+            builder.setPositiveButton(isAdd, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    Integer x;
+                    if (grocery.getText().toString().equals("") || number.getText().toString().equals("")) {
+                        Toast.makeText(getActivity(), "Input Missing", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        try {
+                            x = Integer.parseInt(number.getText().toString());
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(getActivity(), "Invalid Number", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+
+                    if (mEdit) {
+                        mParseObject.put("grocery", grocery.getText().toString());
+                        mParseObject.put("number", x);
+
+                        fragment.mAdapter.replaceObject(mParseObject, mPosition);
+                    } else {
+                        ParseObject groceries = new ParseObject("Groceries");
+                        groceries.put("grocery", grocery.getText().toString());
+                        groceries.put("number", x);
+                        groceries.setACL(new ParseACL(ParseUser.getCurrentUser()));
+
+                        fragment.mAdapter.addObject(groceries);
+                    }
+
+                    fragment.mAdapter.notifyDataSetChanged();
+                }
+            });
 
             return builder.create();
         }

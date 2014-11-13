@@ -31,8 +31,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            </activity>
+        </activity>
 
+        <receiver android:name=".processes.AlarmMangerPoller"
+            android:enabled="true" />
     </application>
 
 </manifest>
