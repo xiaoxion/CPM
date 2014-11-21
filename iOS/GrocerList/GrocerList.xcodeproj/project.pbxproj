@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7BDA9E641A0C120F00A5067B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BDA9E621A0C120F00A5067B /* Bolts.framework */; };
+		7B23DD381A1E9E42005FEE47 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B23DD371A1E9E42005FEE47 /* Parse.framework */; };
+		7B23DD3A1A1E9E7E005FEE47 /* Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B23DD391A1E9E7E005FEE47 /* Data.plist */; };
+		7B3616461A1AB5EE003F5468 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3616431A1AB5EE003F5468 /* Bolts.framework */; };
+		7B3616481A1AB5EE003F5468 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3616451A1AB5EE003F5468 /* ParseUI.framework */; };
+		7BD6968E1A1CF95400032C3F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6968D1A1CF95400032C3F /* Reachability.m */; };
 		7BF08E2C1A0991CA00C25C40 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF08E2B1A0991CA00C25C40 /* main.m */; };
 		7BF08E2F1A0991CA00C25C40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF08E2E1A0991CA00C25C40 /* AppDelegate.m */; };
 		7BF08E321A0991CA00C25C40 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF08E311A0991CA00C25C40 /* ViewController.m */; };
@@ -26,7 +30,6 @@
 		7BF08E771A0AFA7F00C25C40 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF08E761A0AFA7F00C25C40 /* RegisterViewController.m */; };
 		7BF08E7A1A0AFA9B00C25C40 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF08E791A0AFA9B00C25C40 /* MainViewController.m */; };
 		7BF08E7E1A0B026D00C25C40 /* CRToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF08E7D1A0B026D00C25C40 /* CRToast.m */; };
-		7BFFE3801A0C6F5000DE4DB4 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BFFE37F1A0C6F5000DE4DB4 /* Parse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +43,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7BDA9E621A0C120F00A5067B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../../../../Users/esaurubio/Downloads/parse-library-1.4.2/Bolts.framework"; sourceTree = "<group>"; };
-		7BDA9E631A0C120F00A5067B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../../../Users/esaurubio/Downloads/parse-library-1.4.2/Parse.framework"; sourceTree = "<group>"; };
+		7B23DD371A1E9E42005FEE47 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Parse/Parse.framework; sourceTree = "<group>"; };
+		7B23DD391A1E9E7E005FEE47 /* Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Data.plist; sourceTree = "<group>"; };
+		7B3616431A1AB5EE003F5468 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Parse/Bolts.framework; sourceTree = "<group>"; };
+		7B3616451A1AB5EE003F5468 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = Parse/ParseUI.framework; sourceTree = "<group>"; };
+		7BD6968C1A1CF95400032C3F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = "<group>"; };
+		7BD6968D1A1CF95400032C3F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = "<group>"; };
 		7BF08E261A0991CA00C25C40 /* GrocerList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrocerList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BF08E2A1A0991CA00C25C40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BF08E2B1A0991CA00C25C40 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -72,7 +79,6 @@
 		7BF08E791A0AFA9B00C25C40 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7BF08E7C1A0B026D00C25C40 /* CRToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRToast.h; sourceTree = "<group>"; };
 		7BF08E7D1A0B026D00C25C40 /* CRToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRToast.m; sourceTree = "<group>"; };
-		7BFFE37F1A0C6F5000DE4DB4 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Parse/Parse.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +86,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BFFE3801A0C6F5000DE4DB4 /* Parse.framework in Frameworks */,
-				7BDA9E641A0C120F00A5067B /* Bolts.framework in Frameworks */,
+				7B23DD381A1E9E42005FEE47 /* Parse.framework in Frameworks */,
+				7B3616461A1AB5EE003F5468 /* Bolts.framework in Frameworks */,
+				7B3616481A1AB5EE003F5468 /* ParseUI.framework in Frameworks */,
 				7BF08E731A0AD04A00C25C40 /* SystemConfiguration.framework in Frameworks */,
 				7BF08E6F1A0AD03600C25C40 /* Security.framework in Frameworks */,
 				7BF08E6D1A0AD02F00C25C40 /* QuartzCore.framework in Frameworks */,
@@ -104,12 +111,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7BD6968F1A1CF97500032C3F /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				7BD6968C1A1CF95400032C3F /* Reachability.h */,
+				7BD6968D1A1CF95400032C3F /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		7BF08E1D1A0991CA00C25C40 = {
 			isa = PBXGroup;
 			children = (
 				7BF08E281A0991CA00C25C40 /* GrocerList */,
 				7BF08E421A0991CB00C25C40 /* GrocerListTests */,
 				7BF08E271A0991CA00C25C40 /* Products */,
+				7BD6968F1A1CF97500032C3F /* Reachability */,
 				7BF08E7B1A0B026D00C25C40 /* CRToast */,
 				7BF08E741A0AD06B00C25C40 /* Frameworks */,
 			);
@@ -128,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				7BF08E331A0991CA00C25C40 /* Main.storyboard */,
+				7B23DD391A1E9E7E005FEE47 /* Data.plist */,
 				7BF08E2D1A0991CA00C25C40 /* AppDelegate.h */,
 				7BF08E2E1A0991CA00C25C40 /* AppDelegate.m */,
 				7BF08E301A0991CA00C25C40 /* ViewController.h */,
@@ -171,9 +189,9 @@
 		7BF08E741A0AD06B00C25C40 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7BFFE37F1A0C6F5000DE4DB4 /* Parse.framework */,
-				7BDA9E621A0C120F00A5067B /* Bolts.framework */,
-				7BDA9E631A0C120F00A5067B /* Parse.framework */,
+				7B23DD371A1E9E42005FEE47 /* Parse.framework */,
+				7B3616431A1AB5EE003F5468 /* Bolts.framework */,
+				7B3616451A1AB5EE003F5468 /* ParseUI.framework */,
 				7BF08E721A0AD04A00C25C40 /* SystemConfiguration.framework */,
 				7BF08E6E1A0AD03600C25C40 /* Security.framework */,
 				7BF08E6C1A0AD02F00C25C40 /* QuartzCore.framework */,
@@ -285,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B23DD3A1A1E9E7E005FEE47 /* Data.plist in Resources */,
 				7BF08E351A0991CA00C25C40 /* Main.storyboard in Resources */,
 				7BF08E371A0991CA00C25C40 /* Images.xcassets in Resources */,
 			);
@@ -307,6 +326,7 @@
 				7BF08E321A0991CA00C25C40 /* ViewController.m in Sources */,
 				7BF08E2F1A0991CA00C25C40 /* AppDelegate.m in Sources */,
 				7BF08E7E1A0B026D00C25C40 /* CRToast.m in Sources */,
+				7BD6968E1A1CF95400032C3F /* Reachability.m in Sources */,
 				7BF08E2C1A0991CA00C25C40 /* main.m in Sources */,
 				7BF08E7A1A0AFA9B00C25C40 /* MainViewController.m in Sources */,
 				7BF08E771A0AFA7F00C25C40 /* RegisterViewController.m in Sources */,
@@ -426,7 +446,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Parse",
-					"/Users/esaurubio/Downloads/parse-library-1.4.2",
 				);
 				INFOPLIST_FILE = GrocerList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -442,7 +461,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Parse",
-					"/Users/esaurubio/Downloads/parse-library-1.4.2",
 				);
 				INFOPLIST_FILE = GrocerList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;

@@ -44,10 +44,12 @@
                                       kCRToastTextKey : @"Success!",
                                       kCRToastTextAlignmentKey : @(NSTextAlignmentCenter),
                                       kCRToastBackgroundColorKey : [UIColor blueColor],
-                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionLeft),
-                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionRight)
+                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeSpring),
+                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeLinear),
+                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),
+                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
+                                      kCRToastAnimationInTimeIntervalKey : @0.25,
+                                      kCRToastTimeIntervalKey : @0.75
                                       };
             
             [CRToastManager showNotificationWithOptions:options completionBlock:^{[self dismissViewControllerAnimated:YES completion:nil];}];
@@ -56,10 +58,12 @@
                                       kCRToastTextKey : [error userInfo][@"error"],
                                       kCRToastTextAlignmentKey : @(NSTextAlignmentCenter),
                                       kCRToastBackgroundColorKey : [UIColor redColor],
-                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionLeft),
-                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionRight)
+                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeSpring),
+                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeLinear),
+                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),
+                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
+                                      kCRToastAnimationInTimeIntervalKey : @0.25,
+                                      kCRToastTimeIntervalKey : @0.75
                                       };
             
             [CRToastManager showNotificationWithOptions:options completionBlock:nil];

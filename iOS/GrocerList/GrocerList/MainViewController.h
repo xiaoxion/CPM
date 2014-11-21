@@ -12,6 +12,7 @@
 {
     IBOutlet UITableView *groceriesTable;
     NSMutableArray *data;
+    NSString *path;
 }
 
 -(IBAction)onClick:(id)sender;

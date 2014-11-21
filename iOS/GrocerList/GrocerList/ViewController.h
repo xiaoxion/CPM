@@ -12,6 +12,7 @@
 {
     IBOutlet UITextField *username;
     IBOutlet UITextField *password;
+    IBOutlet UIButton *loginButton;
 }
 
 -(IBAction)onClick:(id)sender;
